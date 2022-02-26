@@ -1,0 +1,30 @@
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    transition: background-color 100ms;
+    font-family: monospace;
+}
+
+.cell:hover {
+    background-color: rgba(158, 158, 158, 0.253);
+}
+
+.x {
+    composes: cell;
+    color: lightcoral;
+}
+.x::after {
+    content: "x";
+}
+
+.o {
+    composes: cell;
+    color: rgb(128, 135, 240);
+}
+.o::after {
+    content: "o";
+}
