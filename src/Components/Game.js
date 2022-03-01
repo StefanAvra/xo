@@ -5,33 +5,56 @@ import { useState } from "react";
 const size = [3, 3];
 
 export default function Game() {
-    let cols = [];
+    const [cells, setCells] = useState(
+        Array.from({ length: size[0] * size[1] }, (v, k) =>
+            Object({ index: k, played: "" })
+        )
+    );
 
     const [player, setPlayer] = useState("x");
+    const [winner, setWinner] = useState(false);
 
-    function handleClick() {
+    function handleClick(cell, props) {
+        console.log(cell, props);
+        let newCells = [...cells];
+        newCells[props.cellIndex].played = player;
+        setCells(newCells);
         if (player === "x") {
             setPlayer("o");
         } else setPlayer("x");
     }
 
-    for (let i = 0; i < size[0]; i++) {
-        let cells = [];
-        for (let c = 0; c < size[1]; c++) {
-            cells.push(
-                <Cell
-                    player={player}
-                    handleClick={handleClick}
-                    key={`cell${i}-${c}`}
-                ></Cell>
-            );
-        }
-        cols.push(
-            <div key={i} className={styles.col}>
-                {cells}
+    return (
+        <>
+            <div className={styles.board}>
+                {cells.map((c, index) => (
+                    <Cell
+                        cellIndex={c.index}
+                        handleClick={handleClick}
+                        played={c.played}
+                        key={c.index}
+                    ></Cell>
+                ))}
             </div>
-        );
-    }
-
-    return <div className={styles.game}>{cols}</div>;
+            <div>
+                <h3>
+                    {winner
+                        ? winner
+                        : "Next player: " + player[0].toUpperCase()}
+                </h3>
+                <button
+                    className={styles.resetButton}
+                    onClick={() => {
+                        setCells(
+                            Array.from({ length: size[0] * size[1] }, (v, k) =>
+                                Object({ index: k, played: "" })
+                            )
+                        );
+                    }}
+                >
+                    Reset Game
+                </button>
+            </div>
+        </>
+    );
 }

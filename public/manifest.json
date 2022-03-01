@@ -1,6 +1,6 @@
 {
   "short_name": "xo",
-  "name": "Game of X and O",
+  "name": "Tic Tac Toe",
   "icons": [
     {
       "src": "favicon.ico",

@@ -2,15 +2,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 3em;
-    width: 3em;
-    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    /* border-radius: 50%; */
+    border: 1px dashed lightgray;
     transition: background-color 100ms;
     font-family: monospace;
+    font-size: 1.3em;
 }
 
-.cell:hover {
-    background-color: rgba(158, 158, 158, 0.253);
+@media (hover: hover) {
+    .cell:hover {
+        background-color: rgba(158, 158, 158, 0.1);
+    }
+}
+
+.cell:active {
+    background-color: rgba(158, 158, 158, 0.3);
 }
 
 .x {
