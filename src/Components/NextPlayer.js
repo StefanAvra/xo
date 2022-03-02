@@ -1,9 +1,9 @@
-export default function Winner(props) {
+export default function NextPlayer(props) {
     let fragment = <></>;
     if (props.winner === "draw") {
         fragment = <>It's a draw!</>;
     } else if (props.winner) {
-        fragment = <>{props.winner + " won!"}</>;
+        fragment = <>{props.winner.toUpperCase() + " won!"}</>;
     } else {
         fragment = <>{"Next player: " + props.player[0].toUpperCase()}</>;
     }

@@ -1,6 +1,8 @@
-# Getting Started with xo
+# Tic Tac Toe
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple Tic Tac Toe game made with React.
+
+# Getting Started with xo
 
 ## Available Scripts
 

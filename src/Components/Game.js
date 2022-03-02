@@ -1,7 +1,7 @@
 import styles from "./Game.module.css";
 import Cell from "./Cell";
 import { useState } from "react";
-import Winner from "./Winner";
+import NextPlayer from "./NextPlayer";
 
 const size = [3, 3];
 
@@ -77,7 +77,7 @@ export default function Game() {
                 ))}
             </div>
             <div>
-                <Winner winner={winner} player={player}></Winner>
+                <NextPlayer winner={winner} player={player}></NextPlayer>
                 <button className={styles.resetButton} onClick={resetGame}>
                     Reset Game
                 </button>
