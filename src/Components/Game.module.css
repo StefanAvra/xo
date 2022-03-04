@@ -12,6 +12,12 @@
     font-size: 1.7rem;
 }
 
+.ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .resetButton {
     border-radius: 5px;
     border-width: 2px;

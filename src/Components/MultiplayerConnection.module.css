@@ -1,0 +1,28 @@
+.multiplayer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em;
+}
+.multiplayer button {
+    padding: 3em;
+}
+.status {
+    font-size: small;
+    padding: 0.2em 0.5em;
+    transition: background-color 1s;
+    border-radius: 10px;
+}
+
+.connected {
+    composes: status;
+    background-color: rgb(173, 255, 173);
+}
+
+.disconnected {
+    composes: status;
+    background-color: rgb(216, 189, 184);
+}
+.shareLink {
+    border: 1px solid black;
+}

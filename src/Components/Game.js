@@ -1,9 +1,13 @@
 import styles from "./Game.module.css";
 import Cell from "./Cell";
-import { useState } from "react";
+import MultiplayerConnection from "./MultiplayerConnection";
+import { useState, useEffect } from "react";
 import NextPlayer from "./NextPlayer";
+import io from "socket.io-client";
 
 const size = [3, 3];
+
+const API_URL = process.env.API_URL || "ws://localhost:3001/";
 
 export default function Game() {
     const [cells, setCells] = useState(
@@ -14,6 +18,13 @@ export default function Game() {
 
     const [player, setPlayer] = useState("x");
     const [winner, setWinner] = useState(null);
+    const [socket, setSocket] = useState(null);
+
+    useEffect(() => {
+        const newSocket = io(API_URL);
+        setSocket(newSocket);
+        return () => newSocket.close();
+    }, [setSocket]);
 
     function checkGameover(cells) {
         const winningCombs = [
@@ -52,6 +63,12 @@ export default function Game() {
         setWinner(null);
     }
 
+    function switchPlayer() {
+        if (player === "x") {
+            setPlayer("o");
+        } else setPlayer("x");
+    }
+
     function handleClick(cell, props) {
         // console.log(cell, props);
         if (winner) return;
@@ -59,9 +76,8 @@ export default function Game() {
         newCells[props.cellIndex].played = player;
         setCells(newCells);
         setWinner(checkGameover(cells));
-        if (player === "x") {
-            setPlayer("o");
-        } else setPlayer("x");
+        socket.emit("played", props.cellIndex);
+        switchPlayer();
     }
 
     return (
@@ -76,11 +92,12 @@ export default function Game() {
                     ></Cell>
                 ))}
             </div>
-            <div>
+            <div className={styles.ui}>
                 <NextPlayer winner={winner} player={player}></NextPlayer>
                 <button className={styles.resetButton} onClick={resetGame}>
                     Reset Game
                 </button>
+                <MultiplayerConnection socket={socket} socketId={socket?.id} />
             </div>
         </>
     );
